@@ -1,0 +1,135 @@
+
+version: "3.8"
+
+services:
+  phpfpm:
+    image: bitnami/php-fpm:latest
+    container_name: phpfpm
+    volumes:
+      - ./public:/app
+    networks:
+      - vip-net
+
+  proxy:
+    image: nginx:alpine
+    container_name: proxy
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.proxy.conf:/etc/nginx/conf.d/z-overrides.conf
+    ports:
+      - "80:80"
+    networks:
+      - vip-net
+
+  site2:
+    image: nginx:alpine
+    container_name: site2
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site2.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site3:
+    image: nginx:alpine
+    container_name: site3
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site3.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site4:
+    image: nginx:alpine
+    container_name: site4
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site4.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site5:
+    image: nginx:alpine
+    container_name: site5
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site5.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site6:
+    image: nginx:alpine
+    container_name: site6
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site6.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site7:
+    image: nginx:alpine
+    container_name: site7
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site7.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site8:
+    image: nginx:alpine
+    container_name: site8
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site3.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site9:
+    image: nginx:alpine
+    container_name: site9
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site9.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site10:
+    image: nginx:alpine
+    container_name: site10
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site10.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site11:
+    image: nginx:alpine
+    container_name: site11
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site11.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+
+  site1-loadbalance1:
+    image: nginx:alpine
+    container_name: site1-loadbalance1
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site1.loadbalance1.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+  site1-loadbalance2:
+    image: nginx:alpine
+    container_name: site1-loadbalance2
+    volumes:
+      - ./public:/app
+      - ./nginx.conf/nginx.site1.loadbalance2.conf:/etc/nginx/conf.d/z-overrides.conf
+    networks:
+      - vip-net
+
+networks:
+  vip-net:
+    driver: bridge
